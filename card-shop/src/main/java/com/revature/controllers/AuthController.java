@@ -34,6 +34,7 @@ public class AuthController {
 	public ResponseEntity<String> login(@RequestParam(name="username")String username, @RequestParam(name="password")String password){
 		// Generated a request id for new requests to be handled, this id can be attached to logs to show the flow of the request through the application
 		MDC.put("requestId", UUID.randomUUID().toString());
+		
 		log.debug("Starting login.");
 		
 		// generates a token if credentials are correct

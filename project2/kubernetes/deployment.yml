@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+spec:
+  replicas: 10
+  minReadySeconds: 5
+  strategy: 
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: project2
+  template:
+    metadata:
+      labels:
+        app: project2
+    spec:
+      containers:
+      - name: project2-container
+        image: kth844/project2:1
+        ports:
+        - containerPort: 8080
+        env:
+          - name: DB_URL
+            value: jdbc:postgresql://postgres-service:5432/postgres
+          - name: DB_USER
+            # value: postgres
+#kubectl create secret generic demo-credentials \
+# --from-literal=username=postgres \
+# --from-literal=...=... \
+            valueFrom:
+              secretKeyRef:
+                key: username
+                name: credentials
+                optional: false
+          - name: DB_PASS
+            value: pass
+          # could add an env var for spring profile value: prod

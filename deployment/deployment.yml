@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: card-shop
+spec:
+  replicas: 3
+  minReadySeconds: 5
+  strategy: 
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: card-shop
+  template:
+    metadata:
+      labels:
+        app: card-shop
+    spec:
+      containers:
+      - name: project2-container
+        image: fentrymartin7/fentrymartin:project2
+        ports:
+        - containerPort: 8080
+        env:
+          - name: DB_URL
+            value: jdbc:postgresql://postgres-service:5432/postgres
+          - name: DB_USER
+            valueFrom:
+              secretKeyRef:
+                key: username
+                name: demo-credentials
+                optional: false
+          - name: DB_PASS
+            value: pass
+          # could add an env var for spring profile value: prod

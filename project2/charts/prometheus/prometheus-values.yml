@@ -1,8 +1,0 @@
-grafana:
-  enabled: true
-  sidecar:
-    datasources:
-      enabled: true
-  grafana.ini:
-    server: 
-      root_url: http://localhost/grafana

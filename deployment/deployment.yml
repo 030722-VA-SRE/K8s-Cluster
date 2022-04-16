@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: project2-container
-        image: fentrymartin7/fentrymartin:project2
+        image: henry672/henry672:latest
         ports:
         - containerPort: 8080
         env:

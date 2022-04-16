@@ -27,11 +27,12 @@ spec:
           - name: DB_URL
             value: jdbc:postgresql://postgres-service:5432/postgres
           - name: DB_USER
-            valueFrom:
-              secretKeyRef:
-                key: username
-                name: demo-credentials
-                optional: false
+            value: postgres
+            # valueFrom:
+            #   secretKeyRef:
+            #     key: username
+            #     name: demo-credentials
+            #     optional: false
           - name: DB_PASS
             value: pass
           # could add an env var for spring profile value: prod

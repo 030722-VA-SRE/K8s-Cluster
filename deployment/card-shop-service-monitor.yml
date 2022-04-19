@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: card-shop-svc-monitor
+  namespace: k8s-cluster
+  labels:
+    app: card_shop
+    release: prom
+spec:
+  endpoints:
+  - path: /actuator/prometheus
+    interval: 15s
+    port: http
+  namespaceSelector:
+    matchNames:
+    - k8s-cluster
+  selector:
+    matchLabels:
+      app: card_shop

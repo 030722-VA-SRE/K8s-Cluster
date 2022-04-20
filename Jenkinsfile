@@ -1,7 +1,7 @@
 pipeline{
     agent any
     environment{
-        registry= 'henry672/henry672'
+        registry= 'fentrymartin7/fentrymartin'
         dockerHubCreds = 'dockerhub'
         dockerImage =''
     }

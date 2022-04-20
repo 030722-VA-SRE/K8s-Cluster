@@ -15,7 +15,8 @@ pipeline{
         // }
         stage("Maven clean package"){
             steps{
-                sh 'mvn clean package -Dmaven.test.skip'
+                cd 
+                sh 'mvn -f project2/ clean package -Dmaven.test.skip'
             }
         }
         stage("Docker build"){

@@ -15,7 +15,6 @@ pipeline{
         // }
         stage("Maven clean package"){
             steps{
-                cd 
                 sh 'mvn -f project2/ clean package -Dmaven.test.skip'
             }
         }

@@ -9,7 +9,7 @@ pipeline{
         stage('Code quality analysis'){
             steps{
                 withSonarQubeEnv(credentialsId: 'sonar-token', installationName: 'sonar'){
-                    sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=030722-VA-SRE_K8s-Cluster'
+                    sh 'mvn -f project2/ verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=030722-VA-SRE_K8s-Cluster'
                 }
             }
         }

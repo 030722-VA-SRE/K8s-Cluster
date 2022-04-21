@@ -16,6 +16,11 @@
 	<description>Card shop</description>
 	<properties>
 		<java.version>1.8</java.version>
+		<sonar.organization>030722-va-sre</sonar.organization>
+  		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<coverage.reports.dir>target/coverage-reports</coverage.reports.dir>
+		<sonar.coverage.jacoco.xmlReportPaths>target/side/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+		<sonar.exclusions>src/**/controllers/**/*, src/**/models/**/*,  src/**/repositories/**/*</sonar.exclusions>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -83,6 +88,33 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.7</version>
+				<configuration>
+					<outputDirectory>${coverage.reports.dir}</outputDirectory>
+					<excludes>
+						<exclude>**/controllers/**</exclude>
+						<exclude>**/models/**</exclude>
+						<exclude>**/repositories/**</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<id>prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

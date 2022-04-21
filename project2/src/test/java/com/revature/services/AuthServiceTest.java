@@ -57,7 +57,5 @@ public class AuthServiceTest {
 		
 		assertEquals(c.get("username"),user2.getUsername());
 	}
-	
-	
 
 }

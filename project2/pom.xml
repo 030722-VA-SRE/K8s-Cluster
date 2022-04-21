@@ -21,7 +21,6 @@
 		<coverage.reports.dir>target/coverage-reports</coverage.reports.dir>
 		<sonar.coverage.jacoco.xmlReportPaths>target/side/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 		<sonar.exclusions>src/**/controllers/**/*, src/**/models/**/*,  src/**/repositories/**/*, src/**/exceptions/**/*</sonar.exclusions>
-
 	</properties>
 	<dependencies>
 		<dependency>

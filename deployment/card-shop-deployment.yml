@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: card-shop-deployment
+  namespace: k8s-cluster
+  labels:
+    name: card_shop
+spec:
+  replicas: 3
+  minReadySeconds: 5
+  strategy: 
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: card_shop
+  template:
+    metadata:
+      labels:
+        app: card_shop
+    spec:
+      containers:
+      - name: card-shop-container
+        image: henry672/henry672:latest
+        ports:
+        - containerPort: 8080
+        env:
+          - name: DB_URL
+            value: jdbc:postgresql://postgres-service:5432/postgres
+          - name: DB_USER
+            value: postgres
+            # valueFrom:
+            #   secretKeyRef:
+            #     key: username
+            #     name: demo-credentials
+            #     optional: false
+          - name: DB_PASS
+            value: pass
+          # could add an env var for spring profile value: prod
+        volumeMounts:
+          - mountPath: /logs
+            name: logs
+      - name: promtail-container
+        image: grafana/promtail
+        args:
+        - -config.file=/etc/promtail/promtail.yml
+        volumeMounts:
+        - name: logs
+          mountPath: /logs
+        - name: k8s-promtail-config
+          mountPath: /etc/promtail
+      volumes:
+        - name: logs
+          emptyDir: {}
+        - name: k8s-promtail-config
+          configMap:
+            name: k8s-promtail-config

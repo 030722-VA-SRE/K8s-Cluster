@@ -98,6 +98,7 @@
 						<exclude>**/controllers/**</exclude>
 						<exclude>**/models/**</exclude>
 						<exclude>**/repositories/**</exclude>
+						<exclude>**/exceptions/**</exclude>
 					</excludes>
 				</configuration>
 				<executions>

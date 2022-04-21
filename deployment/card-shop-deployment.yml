@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: card-shop-container
-        image: henry672/henry672:latest
+        image: fentrymartin7/fentrymartin:latest
         ports:
         - containerPort: 8080
         env:

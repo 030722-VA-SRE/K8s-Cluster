@@ -54,9 +54,20 @@ pipeline{
                 }
             }
         }
-        // stage("Deploy to production"){
-           
-        // }
+        stage("Deploy to production"){
+            steps{
+                script{
+                    withAWS(credentials: 'aws-creds', region: 'us-east-1'){
+                        sh 'curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"'
+                        sh 'chmod u+x ./kubectl'
+                        sh 'aws eks update-kubeconfig --name k8s-cluster'
+                        sh './kubectl get pods -n k8s-cluster'
+                        sh "echo $registry:$currentBuild.number"
+                        sh "./kubectl set image -n k8s-cluster deployment/card-shop-deployment card-shop-container=$registry:$currentBuild.number"
+                    }
+                }
+            }
+        }
     }
     // post{
         // always{

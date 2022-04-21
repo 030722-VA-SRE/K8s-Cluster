@@ -6,13 +6,13 @@ pipeline{
         dockerImage =''
     }
     stages{
-        // stage('Code quality analysis'){
-        //     steps{
-        //         withSonarQubeEnv(credentialsId: 'sonar-token', installationName: 'sonar'){
-        //             sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=030722-VA-SRE_pipeline-demo'
-        //         }
-        //     }
-        // }
+        stage('Code quality analysis'){
+            steps{
+                withSonarQubeEnv(credentialsId: 'sonar-token', installationName: 'sonar'){
+                    sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=030722-VA-SRE_K8s-Cluster'
+                }
+            }
+        }
         stage("Maven clean package"){
             steps{
                 sh 'mvn -f project2/pom.xml clean package -Dmaven.test.skip'
@@ -32,6 +32,7 @@ pipeline{
                         dockerImage.push("$currentBuild.number")
                         dockerImage.push("latest")
                     }
+                    
                 }
             }
         }

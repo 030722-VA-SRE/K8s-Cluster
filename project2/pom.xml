@@ -94,7 +94,6 @@
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.8.7</version>
 				<configuration>
-					<outputDirectory>${coverage.reports.dir}</outputDirectory>
 					<excludes>
 						<exclude>**/controllers/**</exclude>
 						<exclude>**/models/**</exclude>
@@ -113,6 +112,11 @@
 						<goals>
 							<goal>report</goal>
 						</goals>
+						<configuration>
+							<formats>
+								<format>XML</format>
+							</formats>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>

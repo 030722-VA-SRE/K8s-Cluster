@@ -35,16 +35,23 @@ spec:
         - containerPort: 8080
         env:
           - name: DB_URL
-            value: jdbc:postgresql://postgres-service:5432/postgres
+            valueFrom:
+              secretKeyRef:
+                 key: url
+                 name: k8s-database-creds
+                 optional: false
           - name: DB_USER
-            value: postgres
-            # valueFrom:
-            #   secretKeyRef:
-            #     key: username
-            #     name: demo-credentials
-            #     optional: false
+            valueFrom:
+              secretKeyRef:
+                 key: username
+                 name: k8s-database-creds
+                 optional: false
           - name: DB_PASS
-            value: pass
+            valueFrom:
+              secretKeyRef:
+                 key: password
+                 name: k8s-database-creds
+                 optional: false
           # could add an env var for spring profile value: prod
         volumeMounts:
           - mountPath: /logs

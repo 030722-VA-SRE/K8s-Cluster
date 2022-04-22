@@ -28,9 +28,6 @@ import com.revature.services.AuthService;
 import com.revature.services.PlayerCardService;
 
 import io.jsonwebtoken.Claims;
-import io.micrometer.core.annotation.Counted;
-import io.micrometer.core.annotation.Timed;
-import io.micrometer.core.instrument.MeterRegistry;
 
 @RestController
 @RequestMapping("/cards")
@@ -39,7 +36,6 @@ public class PlayerCardController {
 	private PlayerCardService pcs;
 	private AuthService authService;
 	private static Logger log = LoggerFactory.getLogger(PlayerCardController.class); 
-	private MeterRegistry meterRegistry;
 	
 	
 	@Autowired

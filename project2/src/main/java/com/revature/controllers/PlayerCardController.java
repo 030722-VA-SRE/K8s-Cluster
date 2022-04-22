@@ -51,7 +51,6 @@ public class PlayerCardController {
 		MDC.put("requestId", UUID.randomUUID().toString());
 		
 		if(name!=null) {
-			meterRegistry.counter("http_client_request").increment();
 			return new ResponseEntity<>(pcs.getCardsByName(name),HttpStatus.OK);
 		}
 		if(points!=null ) {

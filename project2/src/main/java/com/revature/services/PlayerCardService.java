@@ -6,6 +6,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.revature.dtos.PlayerCardDTO;
@@ -13,6 +14,8 @@ import com.revature.exceptions.CardNotFoundException;
 import com.revature.models.PlayerCard;
 import com.revature.repositories.PlayerCardRepository;
 import com.revature.repositories.UserRepository;
+
+import io.micrometer.core.instrument.MeterRegistry;
 
 @Service
 public class PlayerCardService {

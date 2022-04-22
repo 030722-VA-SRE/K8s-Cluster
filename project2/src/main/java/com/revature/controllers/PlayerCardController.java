@@ -28,7 +28,9 @@ import com.revature.services.AuthService;
 import com.revature.services.PlayerCardService;
 
 import io.jsonwebtoken.Claims;
+import io.micrometer.core.annotation.Counted;
 import io.micrometer.core.annotation.Timed;
+import io.micrometer.core.instrument.MeterRegistry;
 
 @RestController
 @RequestMapping("/cards")
@@ -37,6 +39,8 @@ public class PlayerCardController {
 	private PlayerCardService pcs;
 	private AuthService authService;
 	private static Logger log = LoggerFactory.getLogger(PlayerCardController.class); 
+	private MeterRegistry meterRegistry;
+	
 	
 	@Autowired
 	public PlayerCardController(PlayerCardService pcs, AuthService authService) {
@@ -46,12 +50,12 @@ public class PlayerCardController {
 	}
 	
 	@GetMapping
-	@Timed(value = "getAllcards.time", description = "Time taken to return all cards")
 	public ResponseEntity<List<PlayerCardDTO>> getAllCards(@RequestParam(name="name",required=false)String name,
 														@RequestParam(name="points",required=false)String points){
 		MDC.put("requestId", UUID.randomUUID().toString());
 		
 		if(name!=null) {
+			meterRegistry.counter("http_client_request").increment();
 			return new ResponseEntity<>(pcs.getCardsByName(name),HttpStatus.OK);
 		}
 		if(points!=null ) {

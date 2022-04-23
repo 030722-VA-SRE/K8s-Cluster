@@ -37,21 +37,18 @@ spec:
           - name: DB_URL
             valueFrom:
               secretKeyRef:
-                 key: url
-                 name: k8s-database-creds
-                 optional: false
+                name: cardshop-secret
+                key: db-url
           - name: DB_USER
             valueFrom:
               secretKeyRef:
-                 key: username
-                 name: k8s-database-creds
-                 optional: false
+                name: cardshop-secret
+                key: db-username
           - name: DB_PASS
             valueFrom:
               secretKeyRef:
-                 key: password
-                 name: k8s-database-creds
-                 optional: false
+                name: cardshop-secret
+                key: db-password
           # could add an env var for spring profile value: prod
         volumeMounts:
           - mountPath: /logs

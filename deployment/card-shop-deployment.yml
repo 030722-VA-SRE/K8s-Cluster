@@ -6,7 +6,7 @@ metadata:
   labels:
     name: card_shop
 spec:
-  replicas: 3
+  replicas: 1
   minReadySeconds: 5
   strategy: 
     type: RollingUpdate
@@ -26,11 +26,9 @@ spec:
         image: fentrymartin7/fentrymartin:latest
         resources:
           requests:
-            memory: "64Mi"
-            cpu: "50m"
-          limits:
-            memory: "128Mi"
             cpu: "100m"
+          limits:
+            cpu: "150m"
         ports:
         - containerPort: 8080
         env:

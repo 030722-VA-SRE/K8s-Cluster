@@ -11,7 +11,6 @@ public class UserDTO {
 	
 	public UserDTO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public UserDTO(User user) {

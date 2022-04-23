@@ -30,58 +30,12 @@ public class PlayerCardService {
 	
 	public List<PlayerCardDTO> getAllCards()throws CardNotFoundException{
 		List<PlayerCard> cards = pcr.findAll();
-		
-		List<PlayerCardDTO> cardsDto = new ArrayList<>();
-		for(PlayerCard c : cards) {
-			if(c.getCardOwner()!=null)
-			{
-				cardsDto.add(new PlayerCardDTO(c));
-			}
-			else
-			{
-				PlayerCardDTO p = new PlayerCardDTO();
-				p.setId(c.getId());
-				p.setName(c.getName());
-				p.setPosition(c.getPosition());
-				p.setDraftYear(c.getDraftYear());
-				p.setPoints(c.getPoints());
-				p.setRebounds(c.getRebounds());
-				p.setAssists(c.getAssists());
-				p.setUserDto(null);
-				
-				cardsDto.add(p);
-			}
-		}
-		
-		return cardsDto;
+		return convertToDto(cards);
 	}
 	
 	public List<PlayerCardDTO> getMyCards(int id)throws CardNotFoundException{
 		List<PlayerCard> cards = pcr.findMyCards(ur.findById(id).get()); 
-		
-		List<PlayerCardDTO> cardsDto = new ArrayList<>();
-		for(PlayerCard c : cards) {
-			if(c.getCardOwner()!=null)
-			{
-				cardsDto.add(new PlayerCardDTO(c));
-			}
-			else
-			{
-				PlayerCardDTO p = new PlayerCardDTO();
-				p.setId(c.getId());
-				p.setName(c.getName());
-				p.setPosition(c.getPosition());
-				p.setDraftYear(c.getDraftYear());
-				p.setPoints(c.getPoints());
-				p.setRebounds(c.getRebounds());
-				p.setAssists(c.getAssists());
-				p.setUserDto(null);
-				
-				cardsDto.add(p);
-			}
-		}
-		
-		return cardsDto;
+		return convertToDto(cards);
 	}
 	
 	public List<PlayerCard> getAvailableCards(){
@@ -89,8 +43,21 @@ public class PlayerCardService {
 	}
 	
 	public PlayerCardDTO getCardById(int id)throws CardNotFoundException {
-		if(pcr.findCardById(id)==null) {
+		PlayerCard card = pcr.findCardById(id);
+		if(card==null) {
 			throw new CardNotFoundException("No card was found of that id.");
+		}
+		if(card.getCardOwner()==null)
+		{
+			PlayerCardDTO p = new PlayerCardDTO();
+			p.setId(card.getId());
+			p.setName(card.getName());
+			p.setPosition(card.getPosition());
+			p.setDraftYear(card.getDraftYear());
+			p.setPoints(card.getPoints());
+			p.setRebounds(card.getRebounds());
+			p.setAssists(card.getAssists());
+			p.setUserDto(null);			
 		}
 		return new PlayerCardDTO(pcr.findCardById(id));
 	}
@@ -100,57 +67,13 @@ public class PlayerCardService {
 			throw new CardNotFoundException("No card was found of that name.");
 		}
 		List<PlayerCard> cards = pcr.findCardsByName(name);
-		List<PlayerCardDTO> cardsDto = new ArrayList<>();
-		for(PlayerCard c : cards) {
-			if(c.getCardOwner()!=null)
-			{
-				cardsDto.add(new PlayerCardDTO(c));
-			}
-			else
-			{
-				PlayerCardDTO p = new PlayerCardDTO();
-				p.setId(c.getId());
-				p.setName(c.getName());
-				p.setPosition(c.getPosition());
-				p.setDraftYear(c.getDraftYear());
-				p.setPoints(c.getPoints());
-				p.setRebounds(c.getRebounds());
-				p.setAssists(c.getAssists());
-				p.setUserDto(null);
-				
-				cardsDto.add(p);
-			}
-		}
-		
-		return cardsDto;
+		return convertToDto(cards);
 	}
 	
 	public List<PlayerCardDTO> getCardsByPoints(int points) {
 		
 		List<PlayerCard> cards = pcr.findCardsByPoints(points);
-		List<PlayerCardDTO> cardsDto = new ArrayList<>();
-		for(PlayerCard c : cards) {
-			if(c.getCardOwner()!=null)
-			{
-				cardsDto.add(new PlayerCardDTO(c));
-			}
-			else
-			{
-				PlayerCardDTO p = new PlayerCardDTO();
-				p.setId(c.getId());
-				p.setName(c.getName());
-				p.setPosition(c.getPosition());
-				p.setDraftYear(c.getDraftYear());
-				p.setPoints(c.getPoints());
-				p.setRebounds(c.getRebounds());
-				p.setAssists(c.getAssists());
-				p.setUserDto(null);
-				
-				cardsDto.add(p);
-			}
-		}
-		
-		return cardsDto;
+		return convertToDto(cards);
 	}
 	
 	@Transactional
@@ -172,5 +95,31 @@ public class PlayerCardService {
 
 		pcr.deleteById(id);
 		return true;
+	}
+	
+	public List<PlayerCardDTO> convertToDto(List<PlayerCard>cards){
+		List<PlayerCardDTO> cardsDto = new ArrayList<>();
+		for(PlayerCard c : cards) {
+			if(c.getCardOwner()!=null)
+			{
+				cardsDto.add(new PlayerCardDTO(c));
+			}
+			else
+			{
+				PlayerCardDTO p = new PlayerCardDTO();
+				p.setId(c.getId());
+				p.setName(c.getName());
+				p.setPosition(c.getPosition());
+				p.setDraftYear(c.getDraftYear());
+				p.setPoints(c.getPoints());
+				p.setRebounds(c.getRebounds());
+				p.setAssists(c.getAssists());
+				p.setUserDto(null);
+				
+				cardsDto.add(p);
+			}
+		}
+		
+		return cardsDto;
 	}
 }

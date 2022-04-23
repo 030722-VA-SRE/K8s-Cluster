@@ -57,7 +57,8 @@ public class PlayerCardService {
 			p.setPoints(card.getPoints());
 			p.setRebounds(card.getRebounds());
 			p.setAssists(card.getAssists());
-			p.setUserDto(null);			
+			p.setUserDto(null);		
+			return p;
 		}
 		return new PlayerCardDTO(pcr.findCardById(id));
 	}

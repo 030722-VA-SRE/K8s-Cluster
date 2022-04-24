@@ -128,7 +128,7 @@ public class PlayerCardServiceTest {
 	@Test
 	public void deleteCardByIdTest() {
 		when(cardRepo.getById(1)).thenReturn(card);
-		assertEquals(cardServ.deleteCard(1),true);
+		assertEquals(true,cardServ.deleteCard(1));
 	}
 	
 }

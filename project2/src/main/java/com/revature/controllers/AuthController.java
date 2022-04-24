@@ -17,12 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.revature.models.User;
 import com.revature.services.AuthService;
 
+import io.micrometer.core.annotation.Timed;
+
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
 	private AuthService authServ;
-	private static Logger log = LoggerFactory.getLogger(AuthController.class);
+	private static Logger log = LoggerFactory.getLogger(AuthController.class); 
 
 	@Autowired
 	public AuthController(AuthService authServ) {
@@ -31,6 +33,7 @@ public class AuthController {
 	}
 	
 	@PostMapping("/login")
+	@Timed(value = "login.request",histogram = true,percentiles = {0.95, 0.99})  
 	public ResponseEntity<String> login(@RequestParam(name="username")String username, @RequestParam(name="password")String password){
 		// Generated a request id for new requests to be handled, this id can be attached to logs to show the flow of the request through the application
 		MDC.put("requestId", UUID.randomUUID().toString());
@@ -51,6 +54,7 @@ public class AuthController {
 	}
 	
 	@PostMapping("/register")
+	@Timed(value = "register.request",histogram = true,percentiles = {0.95, 0.99}) 
 	public ResponseEntity<String> register(@RequestParam(name="username")String username, @RequestParam(name="password")String password){
 		MDC.put("requestId", UUID.randomUUID().toString());
 		log.debug("Starting register.");

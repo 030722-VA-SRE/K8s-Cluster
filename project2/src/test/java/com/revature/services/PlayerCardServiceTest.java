@@ -131,4 +131,8 @@ public class PlayerCardServiceTest {
 		assertEquals(true,cardServ.deleteCard(1));
 	}
 	
+	@Test
+	public void convertToDtoTest() {
+		assertEquals(cardsDto,cardServ.convertToDto(cards));
+	}
 }

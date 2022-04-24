@@ -33,6 +33,7 @@ public class PlayerCardServiceTest {
 	static PlayerCard card;
 	static PlayerCard card2;
 	static PlayerCardDTO cardDto;
+	static PlayerCardDTO cardDto2;
 	static User user;
 	
 	@BeforeAll
@@ -44,6 +45,7 @@ public class PlayerCardServiceTest {
 		card = new PlayerCard(1,"x","x",1999,1,1,1,user);
 		card2 = new PlayerCard(2,"y","x",1999,1,1,1,null);
 		cardDto = new PlayerCardDTO(card);
+		cardDto2 = new PlayerCardDTO();
 		cards.add(card);
 		cardsDto.add(cardDto);
 	}
@@ -74,8 +76,18 @@ public class PlayerCardServiceTest {
 	
 	@Test
 	public void getCardByIdTest() {
+		cardDto2.setId(card2.getId());
+		cardDto2.setName(card2.getName());
+		cardDto2.setPosition(card2.getPosition());
+		cardDto2.setDraftYear(card2.getDraftYear());
+		cardDto2.setPoints(card2.getPoints());
+		cardDto2.setRebounds(card2.getRebounds());
+		cardDto2.setAssists(card2.getAssists());
+		cardDto2.setUserDto(null);
 		when(cardRepo.findCardById(1)).thenReturn(card);
+		when(cardRepo.findCardById(2)).thenReturn(card2);
 		assertEquals(cardDto, cardServ.getCardById(1));
+		assertEquals(cardDto2, cardServ.getCardById(2));
 	}
 	
 	@Test

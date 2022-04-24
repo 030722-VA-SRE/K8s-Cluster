@@ -16,17 +16,17 @@ import io.micrometer.core.annotation.Counted;
 @ControllerAdvice
 public class ControllerExceptionHandler {
 	
-//	private static final Logger LOG = LoggerFactory.getLogger(GlobalExceptionHandler.class);
-//
-//	@Counted(value = "internalServerError.count", description = "Count of requests that return 500")
-//	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-//    @ExceptionHandler(Exception.class)
-//    public ResponseEntity<Object> handle(Exception e, 
-//                HttpServletRequest request, HttpServletResponse response) {
-//        if (e instanceof NullPointerException) {
-//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//        }
-//        LOG.error("Returned HTTP Status 500 due to the following exception:", e);
-//        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-//    }
+	private static final Logger LOG = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
+	@Counted(value = "internalServerError.count", description = "Count of requests that return 500")
+	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Object> handle(Exception e, 
+                HttpServletRequest request, HttpServletResponse response) {
+        if (e instanceof NullPointerException) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        LOG.error("Returned HTTP Status 500 due to the following exception:", e);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
 }

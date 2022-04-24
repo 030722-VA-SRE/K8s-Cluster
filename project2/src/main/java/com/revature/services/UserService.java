@@ -38,7 +38,7 @@ public class UserService {
 		 *  the newly UserDto objects are then returned
 		 */
 		List<UserDTO> usersDto = users.stream()
-				.map((user) -> new UserDTO(user))
+				.map(user -> new UserDTO(user))
 				.collect(Collectors.toList());
 		
 		return usersDto;
@@ -63,7 +63,7 @@ public class UserService {
 		List<User> users = userRepo.findUsersByRole(role);
 		
 		List<UserDTO> usersDto = users.stream()
-				.map((user) -> new UserDTO(user))
+				.map(user -> new UserDTO(user))
 				.collect(Collectors.toList());
 		return usersDto;
 	}

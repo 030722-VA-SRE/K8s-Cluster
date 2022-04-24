@@ -34,7 +34,7 @@ public class PlayerCardService {
 	}
 	
 	public List<PlayerCardDTO> getMyCards(int id)throws CardNotFoundException{
-		List<PlayerCard> cards = pcr.findMyCards(ur.findById(id).get()); 
+		List<PlayerCard> cards = pcr.findMyCards(ur.getById(id)); 
 		return convertToDto(cards);
 	}
 	

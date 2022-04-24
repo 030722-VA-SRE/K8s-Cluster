@@ -86,6 +86,6 @@ public class UserServiceTest {
 	@Test
 	public void deleteUserTest() {
 		when(userRepo.getById(1)).thenReturn(user1);
-		assertEquals(userServ.deleteUser(1),true);
+		assertEquals(true,userServ.deleteUser(1));
 	}
 }

@@ -36,3 +36,6 @@ To-do list:
 `git clone https://github.com/030722-VA-SRE/K8s-Cluster.git`
 
 ## Usage
+
+## Contributors
+Henry Gay, Fentry Martin, Kaitlyn Moore and Kyle Pfunder

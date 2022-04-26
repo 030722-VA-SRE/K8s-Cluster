@@ -35,6 +35,6 @@ To-do list:
 ## Getting Started
 - Clone Repository using Git Bash
 
-`git clone `
+`git clone https://github.com/030722-VA-SRE/K8s-Cluster.git`
 
 ## Usage

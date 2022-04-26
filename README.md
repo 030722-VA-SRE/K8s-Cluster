@@ -8,6 +8,7 @@ Card-shop is an application programming interface that allows users to create an
 - Spring
 - JUnit
 - Mockito
+- JWT
 - Docker
 - Promtail
 - Loki

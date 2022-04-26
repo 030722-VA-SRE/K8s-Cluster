@@ -29,8 +29,8 @@ Admin users can:
    - delete cards
 
 To-do list:
-- Add more user login functionality 
-- More metric monitoring 
+- Add Alerting Rules
+- Implement more custom metrics
 
 ## Getting Started
 - Clone Repository using Git Bash

@@ -5,9 +5,7 @@ Card-shop is an application programming interface that allows users to create an
 ## Technologies Used
 - Java
 - Maven
-- Spring Boot 
-- Spring MVC
-- Spring Data JPA
+- Spring
 - JUnit
 - Mockito
 - Docker

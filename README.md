@@ -27,7 +27,7 @@ Admin users can:
    - delete cards
    - assign users to a card
 
-To-do list:
+## To-do list:
 - Add Alerting Rules
 - Implement more custom metrics
 

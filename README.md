@@ -19,6 +19,8 @@ Card-shop is an application programming interface that allows users to create an
 
 ## Features
 Users can: 
+   - login as customer or admin
+   - register for a customer account
    - see cards they own
 
 Admin users can: 
@@ -37,16 +39,30 @@ Admin users can:
 
 `git clone https://github.com/030722-VA-SRE/K8s-Cluster.git`
 
-(include all environment setup steps)
-
-> Be sure to include BOTH Windows and Unix command  
-> Be sure to mention if the commands only work on a specific platform (eg. AWS, GCP)
-
-- All the `code` required to get started
-- Images of what it should look like
+- Install Kubernetes and create deployment
+- Install Docker and Jenkins onto EC2 
+- Navigate to repository and create deployment
+   `kubectl apply -f ./deployment`
 
 ## Usage
-> Here, you instruct other people on how to use your project after they’ve installed it. This would also be a good place to include screenshots of your project in action.
+- Use Postman or web browser to send requests 
+* Login
+> /auth/login
+* Register
+> /auth/register
+* Get all cards
+> /cards
+* Get/create/update/delete card by id
+> /cards/{id}
+* Get card by name
+> /cards/{name}
+* Get user list
+> /users
+* Get/create/update/delete user by id
+> /users/{id}
+* All POST, PUT, and DELETE requests can only be performed when logged in as admin. After login, copy JWT token from response header into Authorization in request header.
+* Use grafana to view logs and metrics using Loki and Prometheus
+> /grafana
 
 ## Contributors
 Henry Gay, Fentry Martin, Kaitlyn Moore and Kyle Pfunder
